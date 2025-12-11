@@ -1,0 +1,804 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <title>AI Фитнес-Тренер — Умный тренажёрный ассистент</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+    :root {
+      --bg: #05070b;
+      --bg-alt: #0b0f16;
+      --card: #10141f;
+      --card-soft: #0d121b;
+      --accent: #ff6b2c;
+      --accent-soft: rgba(255, 107, 44, 0.12);
+      --accent-strong: #ff7237;
+      --text: #f9fafb;
+      --muted: #9ca3af;
+      --border: #1f2933;
+      --radius-lg: 18px;
+      --radius-xl: 26px;
+      --shadow-soft: 0 20px 50px rgba(0, 0, 0, 0.65);
+      --transition: all 0.2s ease-out;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text",
+        system-ui, sans-serif;
+      background: radial-gradient(circle at top, #111827 0, #02040a 55%);
+      color: var(--text);
+      min-height: 100vh;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    img {
+      max-width: 100%;
+      display: block;
+    }
+
+    .page {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 20px 18px 80px;
+    }
+
+    /* HEADER / NAV */
+
+    .top-nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      padding: 12px 4px 24px;
+    }
+
+    .logo-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .logo-mark {
+      width: 34px;
+      height: 34px;
+      border-radius: 999px;
+      background: radial-gradient(circle at 30% 0, #ffb347, #ff6b2c, #f97316);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      font-size: 18px;
+      color: #020617;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
+    }
+
+    .logo-text-main {
+      font-weight: 700;
+      letter-spacing: 0.01em;
+      font-size: 16px;
+    }
+
+    .logo-text-sub {
+      font-size: 11px;
+      color: var(--muted);
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 22px;
+      font-size: 14px;
+    }
+
+    .nav-link {
+      color: #e5e7eb;
+      position: relative;
+      padding-bottom: 3px;
+    }
+
+    .nav-link::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: -4px;
+      width: 0;
+      height: 2px;
+      border-radius: 999px;
+      background: var(--accent);
+      transition: width 0.18s ease-out;
+    }
+
+    .nav-link:hover::after {
+      width: 100%;
+    }
+
+    .nav-cta {
+      padding: 10px 18px;
+      border-radius: 999px;
+      border: none;
+      font-size: 14px;
+      font-weight: 500;
+      background: var(--accent);
+      color: #111827;
+      box-shadow: 0 12px 32px rgba(255, 107, 44, 0.45);
+      cursor: pointer;
+      transition: var(--transition);
+      white-space: nowrap;
+    }
+
+    .nav-cta:hover {
+      transform: translateY(-1px);
+      background: var(--accent-strong);
+    }
+
+    /* HERO */
+
+    .hero {
+      display: grid;
+      grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr);
+      gap: 26px;
+      align-items: stretch;
+      margin-top: 10px;
+    }
+
+    .hero-text h1 {
+      font-size: 38px;
+      line-height: 1.1;
+      margin-bottom: 10px;
+      letter-spacing: -0.03em;
+    }
+
+    .hero-text h2 {
+      font-size: 22px;
+      color: var(--accent);
+      margin-bottom: 10px;
+      font-weight: 600;
+    }
+
+    .hero-text p {
+      color: var(--muted);
+      max-width: 480px;
+      font-size: 15px;
+      margin-bottom: 20px;
+    }
+
+    .hero-cta {
+      padding: 13px 24px;
+      border-radius: 999px;
+      border: none;
+      font-size: 15px;
+      font-weight: 500;
+      background: var(--accent);
+      color: #020617;
+      cursor: pointer;
+      box-shadow: 0 16px 42px rgba(255, 107, 44, 0.5);
+      transition: var(--transition);
+    }
+
+    .hero-cta:hover {
+      transform: translateY(-1px);
+      background: var(--accent-strong);
+    }
+
+    /* HERO VISUAL */
+
+    .hero-visual {
+      background: radial-gradient(circle at top, #1f2933, #05070b 70%);
+      border-radius: var(--radius-xl);
+      padding: 16px 16px 18px;
+      position: relative;
+      box-shadow: var(--shadow-soft);
+      border: 1px solid rgba(15, 23, 42, 0.9);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    .camera-label {
+      position: absolute;
+      top: 16px;
+      right: 18px;
+      padding: 4px 10px;
+      font-size: 11px;
+      border-radius: 999px;
+      border: 1px solid rgba(148, 163, 184, 0.5);
+      color: #e5e7eb;
+      background: rgba(15, 23, 42, 0.9);
+    }
+
+    .hero-video-frame {
+      margin-top: 10px;
+      background: radial-gradient(circle at top, #111827, #020617 70%);
+      border-radius: 22px;
+      padding: 26px 32px;
+      display: flex;
+      justify-content: space-between;
+      gap: 22px;
+      align-items: center;
+      border: 1px solid rgba(31, 41, 55, 0.9);
+    }
+
+    .pose-figure {
+      position: relative;
+      width: 60%;
+      aspect-ratio: 4 / 3;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .pose-body {
+      position: relative;
+      width: 130px;
+      height: 160px;
+    }
+
+    .pose-joint {
+      width: 9px;
+      height: 9px;
+      border-radius: 999px;
+      background: var(--accent);
+      position: absolute;
+      transform: translate(-50%, -50%);
+    }
+
+    .pose-line {
+      position: absolute;
+      height: 2px;
+      background: var(--accent);
+      transform-origin: left center;
+    }
+
+    /* approximate manual placement */
+    .joint-head { top: 10%; left: 50%; }
+    .joint-neck { top: 24%; left: 50%; }
+    .joint-shoulder-l { top: 28%; left: 32%; }
+    .joint-shoulder-r { top: 28%; left: 68%; }
+    .joint-elbow-l { top: 40%; left: 22%; }
+    .joint-elbow-r { top: 40%; left: 78%; }
+    .joint-hip-l { top: 46%; left: 44%; }
+    .joint-hip-r { top: 46%; left: 56%; }
+    .joint-knee-l { top: 67%; left: 38%; }
+    .joint-knee-r { top: 67%; left: 62%; }
+    .joint-feet-l { top: 88%; left: 32%; }
+    .joint-feet-r { top: 88%; left: 68%; }
+
+    .mini-stick {
+      width: 60px;
+      aspect-ratio: 3 / 8;
+      border-radius: 18px;
+      background: radial-gradient(circle at top, #111827, #020617);
+      border: 1px solid #1f2933;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .mini-stick-inner {
+      width: 26px;
+      height: 60px;
+      position: relative;
+    }
+
+    .mini-stick-inner::before,
+    .mini-stick-inner::after {
+      content: "";
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      border-radius: 999px;
+      background: var(--accent);
+    }
+
+    .mini-stick-inner::before {
+      width: 7px;
+      height: 7px;
+      top: 0;
+    }
+
+    .mini-stick-inner::after {
+      width: 2px;
+      height: 46px;
+      top: 7px;
+    }
+
+    .mini-stick-inner span {
+      position: absolute;
+      width: 26px;
+      height: 2px;
+      background: var(--accent);
+      top: 18px;
+      left: 0;
+    }
+
+    .hero-overlay-label {
+      position: absolute;
+      left: 50%;
+      top: 6px;
+      transform: translateX(-50%);
+      font-size: 11px;
+      color: var(--muted);
+    }
+
+    .hero-caption {
+      margin-top: 8px;
+      font-size: 12px;
+      color: var(--muted);
+    }
+
+    /* FEATURES */
+
+    .features {
+      margin-top: 28px;
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 16px;
+    }
+
+    .feature-card {
+      background: var(--card);
+      border-radius: var(--radius-lg);
+      padding: 16px 16px 15px;
+      border: 1px solid rgba(15, 23, 42, 0.9);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .feature-icon {
+      width: 28px;
+      height: 28px;
+      border-radius: 999px;
+      background: var(--accent-soft);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 16px;
+      margin-bottom: 2px;
+    }
+
+    .feature-title {
+      font-size: 14px;
+      font-weight: 600;
+    }
+
+    .feature-desc {
+      font-size: 12px;
+      color: var(--muted);
+    }
+
+    /* LOWER GRID: DEMO + PROGRESS */
+
+    .lower-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr);
+      gap: 22px;
+      margin-top: 34px;
+    }
+
+    .section-title {
+      font-size: 18px;
+      font-weight: 600;
+      margin-bottom: 10px;
+    }
+
+    .demo-card,
+    .progress-card {
+      background: var(--card-soft);
+      border-radius: var(--radius-xl);
+      padding: 18px 20px 20px;
+      border: 1px solid rgba(17, 24, 39, 0.95);
+      box-shadow: var(--shadow-soft);
+    }
+
+    .demo-chart {
+      margin-top: 10px;
+      border-radius: 16px;
+      background: radial-gradient(circle at top, #111827, #020617 70%);
+      border: 1px solid #1f2933;
+      padding: 16px 18px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .demo-chart-label {
+      font-size: 11px;
+      color: var(--muted);
+      margin-bottom: 6px;
+    }
+
+    .chart-grid {
+      position: absolute;
+      inset: 10px 12px 10px 32px;
+      background-image: linear-gradient(
+          to right,
+          rgba(148, 163, 184, 0.18) 1px,
+          transparent 1px
+        ),
+        linear-gradient(
+          to top,
+          rgba(148, 163, 184, 0.18) 1px,
+          transparent 1px
+        );
+      background-size: 40px 24px;
+      opacity: 0.6;
+      pointer-events: none;
+    }
+
+    .chart-axes {
+      position: relative;
+      height: 170px;
+    }
+
+    .chart-axes::before,
+    .chart-axes::after {
+      content: "";
+      position: absolute;
+      background: rgba(148, 163, 184, 0.4);
+    }
+
+    .chart-axes::before {
+      left: 32px;
+      top: 4px;
+      bottom: 16px;
+      width: 1px;
+    }
+
+    .chart-axes::after {
+      left: 32px;
+      right: 8px;
+      bottom: 18px;
+      height: 1px;
+    }
+
+    .chart-line {
+      position: absolute;
+      left: 34px;
+      right: 12px;
+      top: 24px;
+      bottom: 24px;
+    }
+
+    .chart-polyline {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        to right,
+        #f97316,
+        #fb923c,
+        #f97316
+      );
+      mask-image: radial-gradient(circle at 0 90%, transparent 0, transparent 20px, black 20px),
+        linear-gradient(135deg, black 50%, transparent 0);
+      opacity: 0.7;
+    }
+
+    /* simple fake dots */
+    .chart-dot {
+      position: absolute;
+      width: 7px;
+      height: 7px;
+      border-radius: 999px;
+      background: var(--accent);
+      transform: translate(-50%, -50%);
+      box-shadow: 0 0 0 4px rgba(248, 113, 22, 0.2);
+    }
+
+    .dot-1 { left: 12%; top: 72%; }
+    .dot-2 { left: 32%; top: 55%; }
+    .dot-3 { left: 52%; top: 60%; }
+    .dot-4 { left: 72%; top: 38%; }
+    .dot-5 { left: 90%; top: 42%; }
+
+    .demo-x-labels {
+      display: flex;
+      justify-content: space-between;
+      padding: 4px 4px 0 32px;
+      font-size: 10px;
+      color: var(--muted);
+    }
+
+    .progress-layout {
+      margin-top: 8px;
+      display: grid;
+      grid-template-columns: minmax(0, 1fr);
+      gap: 14px;
+    }
+
+    .level-card {
+      background: radial-gradient(circle at top, #111827, #020617 70%);
+      border-radius: 16px;
+      padding: 14px 16px;
+      border: 1px solid #1f2933;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+    }
+
+    .level-text {
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+    }
+
+    .level-label {
+      font-size: 12px;
+      color: var(--muted);
+    }
+
+    .level-value {
+      font-size: 26px;
+      font-weight: 700;
+    }
+
+    .level-stars {
+      display: flex;
+      gap: 4px;
+      font-size: 14px;
+      color: #fed7aa;
+    }
+
+    .badge-row {
+      display: flex;
+      gap: 8px;
+      font-size: 11px;
+    }
+
+    .pill {
+      padding: 4px 8px;
+      border-radius: 999px;
+      background: rgba(15, 23, 42, 0.9);
+      border: 1px solid rgba(248, 113, 22, 0.5);
+      color: #fed7aa;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .pill span.icon {
+      font-size: 12px;
+    }
+
+    .note-card {
+      background: #05070b;
+      border-radius: 14px;
+      padding: 11px 13px;
+      border: 1px solid #1f2933;
+      font-size: 12px;
+      color: var(--muted);
+      line-height: 1.5;
+    }
+
+    footer {
+      margin-top: 36px;
+      font-size: 11px;
+      color: #6b7280;
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    /* RESPONSIVE */
+
+    @media (max-width: 960px) {
+      .hero {
+        grid-template-columns: minmax(0, 1fr);
+      }
+
+      .hero-visual {
+        order: -1;
+      }
+
+      .features {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .lower-grid {
+        grid-template-columns: minmax(0, 1fr);
+      }
+    }
+
+    @media (max-width: 640px) {
+      .top-nav {
+        flex-wrap: wrap;
+        gap: 12px;
+      }
+
+      .nav-links {
+        display: none; /* simplify on mobile */
+      }
+
+      .hero-text h1 {
+        font-size: 30px;
+      }
+
+      .features {
+        grid-template-columns: minmax(0, 1fr);
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <!-- HEADER -->
+    <header class="top-nav">
+      <div class="logo-row">
+        <div class="logo-mark">AI</div>
+        <div>
+          <div class="logo-text-main">AI Фитнес-Тренер</div>
+          <div class="logo-text-sub">Умный тренажёрный ассистент</div>
+        </div>
+      </div>
+
+      <nav class="nav-links">
+        <a href="#features" class="nav-link">Функционал</a>
+        <a href="#demo" class="nav-link">Демо</a>
+        <a href="#progress" class="nav-link">Прогресс</a>
+      </nav>
+
+      <button class="nav-cta" onclick="location.href='camera.html'">Начать тренировку с ИИ</button>
+    </header>
+
+    <!-- HERO -->
+    <section class="hero">
+      <div class="hero-text">
+        <h1>AI ФИТНЕС-ТРЕНЕР</h1>
+        <h2>Умный тренажёрный ассистент</h2>
+        <p>
+          Камера следит за повторениями, считает подходы и исправляет технику
+          в реальном времени. Тренируйтесь безопасно и эффективно с помощью
+          компьютерного зрения и анализа углов суставов.
+        </p>
+        <button class="hero-cta" onclick="location.href='camera.html'">Начать тренировку с ИИ</button>
+      </div>
+
+      <div class="hero-visual">
+        <div class="camera-label">CAMERA ON</div>
+
+        <div class="hero-video-frame">
+          <div class="pose-figure">
+            <div class="pose-body">
+              <div class="pose-joint joint-head"></div>
+              <div class="pose-joint joint-neck"></div>
+              <div class="pose-joint joint-shoulder-l"></div>
+              <div class="pose-joint joint-shoulder-r"></div>
+              <div class="pose-joint joint-elbow-l"></div>
+              <div class="pose-joint joint-elbow-r"></div>
+              <div class="pose-joint joint-hip-l"></div>
+              <div class="pose-joint joint-hip-r"></div>
+              <div class="pose-joint joint-knee-l"></div>
+              <div class="pose-joint joint-knee-r"></div>
+              <div class="pose-joint joint-feet-l"></div>
+              <div class="pose-joint joint-feet-r"></div>
+            </div>
+          </div>
+
+          <div class="mini-stick">
+            <div class="mini-stick-inner">
+              <span></span>
+            </div>
+          </div>
+        </div>
+
+        <p class="hero-caption">
+          AI анализирует вашу стойку и даёт сигналы, когда нужно выпрямить спину,
+          глубже присесть или скорректировать баланс.
+        </p>
+      </div>
+    </section>
+
+    <!-- FEATURES -->
+    <section class="features" id="features">
+      <article class="feature-card">
+        <div class="feature-icon">💪</div>
+        <div class="feature-title">Детекция упражнений</div>
+        <div class="feature-desc">
+          Автоматическое определение: приседания, отжимания, планка и другие
+          базовые упражнения.
+        </div>
+      </article>
+
+      <article class="feature-card">
+        <div class="feature-icon">⚡</div>
+        <div class="feature-title">Коррекция техники</div>
+        <div class="feature-desc">
+          Анализ углов между суставами и предупреждения, если спина согнута
+          или колени уходят вперёд.
+        </div>
+      </article>
+
+      <article class="feature-card">
+        <div class="feature-icon">🏆</div>
+        <div class="feature-title">Геймификация</div>
+        <div class="feature-desc">
+          Уровни, ачивки и streak-серии, которые мотивируют тренироваться
+          регулярно.
+        </div>
+      </article>
+
+      <article class="feature-card">
+        <div class="feature-icon">📈</div>
+        <div class="feature-title">Аналитика</div>
+        <div class="feature-desc">
+          Графики прогресса, нагрузка по дням, лучшее время тренировки и общее
+          количество повторений.
+        </div>
+      </article>
+    </section>
+
+    <!-- DEMO + PROGRESS -->
+    <section class="lower-grid">
+      <div class="demo-card" id="demo">
+        <h3 class="section-title">Демо</h3>
+        <div class="demo-chart">
+          <div class="demo-chart-label">WEBКАМЕРА · Счётчик повторений</div>
+          <div class="chart-grid"></div>
+          <div class="chart-axes">
+            <div class="chart-line">
+              <div class="chart-polyline"></div>
+              <div class="chart-dot dot-1"></div>
+              <div class="chart-dot dot-2"></div>
+              <div class="chart-dot dot-3"></div>
+              <div class="chart-dot dot-4"></div>
+              <div class="chart-dot dot-5"></div>
+            </div>
+          </div>
+          <div class="demo-x-labels">
+            <span>0:00</span>
+            <span>0:45</span>
+            <span>1:30</span>
+            <span>2:15</span>
+            <span>3:00</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="progress-card" id="progress">
+        <h3 class="section-title">Прогресс</h3>
+        <div class="progress-layout">
+          <div class="level-card">
+            <div class="level-text">
+              <div class="level-label">Текущий уровень</div>
+              <div class="level-value">4</div>
+            </div>
+            <div class="level-stars">★ ★ ★ ☆</div>
+            <div class="badge-row">
+              <div class="pill">
+                <span class="icon">⚡</span> 50 тренировок
+              </div>
+              <div class="pill">
+                <span class="icon">🔥</span> Streak 12 дней
+              </div>
+            </div>
+          </div>
+
+          <div class="note-card">
+            Большой молодец! Вы улучшили глубину приседаний и стабильность
+            корпуса. Продолжайте тренировки ещё 3 дня, чтобы открыть новый
+            уровень и получить дополнительный бонус к streak’у.
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      <span>© 2025 AI Фитнес-Тренер · Smart Workout Assistant</span>
+      <span>Made for CV-проект · камера + позы + аналитика</span>
+    </footer>
+  </div>
+</body>
+</html>
