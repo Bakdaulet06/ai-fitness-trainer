@@ -611,10 +611,6 @@ footer {
     gap: 12px;
     }
 
-    .nav-links {
-    display: none; /* simplify on mobile */
-    }
-
     .hero-text h1 {
     font-size: 30px;
     }
