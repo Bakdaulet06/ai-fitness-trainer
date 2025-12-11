@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <title>AI Фитнес-Тренер — Профиль</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="stylesheet" href="styles/index.css">
+</head>
+<body class="profile">
+  <div class="page">
+    <!-- HEADER -->
+    <header class="top-nav">
+      <div class="logo-row">
+        <div class="logo-mark">AI</div>
+        <div>
+          <div class="logo-text-main">AI Фитнес-Тренер</div>
+          <div class="logo-text-sub">Профиль пользователя</div>
+        </div>
+      </div>
+
+      <nav class="nav-links">
+        <a href="index.html" class="nav-link">Главная</a>
+        <a href="profile.html" class="nav-link">Профиль</a>
+        <a href="exercises.html" class="nav-link">Упражнения</a>
+      </nav>
+
+      <button class="nav-cta" onclick="location.href='camera.html'">
+        Начать тренировку
+      </button>
+    </header>
+
+    <!-- PROFILE MAIN -->
+    <section class="profile-main">
+      <div class="profile-header">
+        <div class="profile-avatar">
+          <span>AB</span>
+        </div>
+        <div class="profile-info">
+          <h1 class="profile-name">Bakdaulet Baigozha</h1>
+          <p class="profile-username">@bakdaulet06</p>
+          <div class="profile-tags">
+            <span class="profile-tag">Уровень 4</span>
+            <span class="profile-tag">Streak: 12 дней 🔥</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="profile-stats-row">
+        <div class="profile-stat-card">
+          <div class="label">Тренировок за неделю</div>
+          <div class="value">5</div>
+          <div class="sub">Цель: 4 / нед</div>
+        </div>
+        <div class="profile-stat-card">
+          <div class="label">Тренировок за месяц</div>
+          <div class="value">18</div>
+          <div class="sub">Новый рекорд 🎉</div>
+        </div>
+        <div class="profile-stat-card">
+          <div class="label">Всего повторений</div>
+          <div class="value">3 420</div>
+          <div class="sub">Приседания, планка, отжимания</div>
+        </div>
+      </div>
+
+      <div class="profile-grid">
+        <!-- LEFT: PERIOD STATS -->
+        <section class="profile-card large">
+          <div class="profile-card-header">
+            <h2>Статистика по периодам</h2>
+            <div class="chip-group">
+              <button class="chip active">Неделя</button>
+              <button class="chip">Месяц</button>
+              <button class="chip">Все время</button>
+            </div>
+          </div>
+          <div class="period-stats">
+            <div class="period-row">
+              <span>Приседания</span>
+              <span class="pill small">1 150 повторений</span>
+            </div>
+            <div class="period-row">
+              <span>Отжимания</span>
+              <span class="pill small">620 повторений</span>
+            </div>
+            <div class="period-row">
+              <span>Планка</span>
+              <span class="pill small">45 мин</span>
+            </div>
+            <div class="period-row">
+              <span>Ядро (кор)</span>
+              <span class="pill small">280 повторений</span>
+            </div>
+          </div>
+        </section>
+
+        <!-- RIGHT: PROGRESS GRAPH MOCKUP -->
+        <section class="profile-card">
+          <h2>График активности</h2>
+          <p class="muted-label">Последние 7 дней · тренировки по дням</p>
+          <div class="mini-bar-chart">
+            <div class="bar" style="height: 30%"><span>Пн</span></div>
+            <div class="bar" style="height: 80%"><span>Вт</span></div>
+            <div class="bar" style="height: 65%"><span>Ср</span></div>
+            <div class="bar" style="height: 90%"><span>Чт</span></div>
+            <div class="bar" style="height: 40%"><span>Пт</span></div>
+            <div class="bar" style="height: 70%"><span>Сб</span></div>
+            <div class="bar" style="height: 10%"><span>Вс</span></div>
+          </div>
+        </section>
+      </div>
+
+      <!-- RECENT SESSIONS -->
+      <section class="profile-card recent">
+        <div class="profile-card-header">
+          <h2>Недавние тренировки</h2>
+        </div>
+        <div class="session-list">
+          <div class="session-row">
+            <div>
+              <div class="session-title">Низ тела · Приседания</div>
+              <div class="session-meta">3 подхода · 15 / 15 / 12 повторений</div>
+            </div>
+            <div class="session-tag good">Техника улучшена ✅</div>
+          </div>
+
+          <div class="session-row">
+            <div>
+              <div class="session-title">Верх тела · Отжимания</div>
+              <div class="session-meta">4 подхода · 10 / 10 / 8 / 6 повторений</div>
+            </div>
+            <div class="session-tag neutral">Стабильная техника</div>
+          </div>
+
+          <div class="session-row">
+            <div>
+              <div class="session-title">Кор · Планка</div>
+              <div class="session-meta">3 раунда · 45 сек · отдых 20 сек</div>
+            </div>
+            <div class="session-tag alert">AI: следить за поясницей</div>
+          </div>
+        </div>
+      </section>
+    </section>
+
+    <footer>
+      <span>© 2025 AI Фитнес-Тренер · Профиль</span>
+      <span>Данные условные · подключите бэкенд позже</span>
+    </footer>
+  </div>
+</body>
+</html>

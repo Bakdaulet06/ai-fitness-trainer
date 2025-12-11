@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <title>AI Фитнес-Тренер — Упражнения</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="stylesheet" href="styles/index.css">
+</head>
+<body class="exercises">
+  <div class="page">
+    <!-- HEADER -->
+    <header class="top-nav">
+      <div class="logo-row">
+        <div class="logo-mark">AI</div>
+        <div>
+          <div class="logo-text-main">AI Фитнес-Тренер</div>
+          <div class="logo-text-sub">Библиотека упражнений</div>
+        </div>
+      </div>
+
+      <nav class="nav-links">
+        <a href="index.html" class="nav-link">Главная</a>
+        <a href="profile.html" class="nav-link">Профиль</a>
+        <a href="exercises.html" class="nav-link">Упражнения</a>
+      </nav>
+
+      <button class="nav-cta" onclick="location.href='camera.html'">
+        Тренироваться
+      </button>
+    </header>
+
+    <!-- FLASHCARDS SECTION -->
+    <section class="flashcards-header">
+      <h1>Упражнения</h1>
+      <p>
+        Нажмите на карточку, чтобы перевернуть её и увидеть подсказки по технике
+        и то, как AI будет оценивать движение.
+      </p>
+    </section>
+
+    <section class="flashcards-grid">
+      <!-- CARD 1 -->
+      <article class="exercise-card">
+        <div class="card-inner">
+          <div class="card-face card-front">
+            <div class="card-label">Низ тела</div>
+            <h2>Приседания</h2>
+            <p class="difficulty">Сложность: ⭐⭐☆</p>
+            <ul class="tags">
+              <li>Ноги</li>
+              <li>Ягодицы</li>
+              <li>Кор</li>
+            </ul>
+            <p class="hint">Нажмите, чтобы увидеть технику</p>
+          </div>
+          <div class="card-face card-back">
+            <h3>Подсказки по технике</h3>
+            <ul class="details">
+              <li>Держите спину нейтральной, не округляйте поясницу.</li>
+              <li>Колени не уходят далеко вперёд за носки.</li>
+              <li>Смотрите вперёд, вес на пятках.</li>
+            </ul>
+            <p class="ai-note">AI будет отслеживать угол в коленях и наклон корпуса.</p>
+          </div>
+        </div>
+      </article>
+
+      <!-- CARD 2 -->
+      <article class="exercise-card">
+        <div class="card-inner">
+          <div class="card-face card-front">
+            <div class="card-label">Верх тела</div>
+            <h2>Отжимания</h2>
+            <p class="difficulty">Сложность: ⭐⭐⭐</p>
+            <ul class="tags">
+              <li>Грудь</li>
+              <li>Плечи</li>
+              <li>Трицепс</li>
+            </ul>
+            <p class="hint">Нажмите, чтобы увидеть технику</p>
+          </div>
+          <div class="card-face card-back">
+            <h3>Подсказки по технике</h3>
+            <ul class="details">
+              <li>Корпус — одна линия: плечи, таз, пятки.</li>
+              <li>Не проваливайте поясницу, не поднимайте таз.</li>
+              <li>Локти примерно под углом 45°.</li>
+            </ul>
+            <p class="ai-note">AI отслеживает прямую линию корпуса и глубину опускания.</p>
+          </div>
+        </div>
+      </article>
+
+      <!-- CARD 3 -->
+      <article class="exercise-card">
+        <div class="card-inner">
+          <div class="card-face card-front">
+            <div class="card-label">Кор</div>
+            <h2>Планка</h2>
+            <p class="difficulty">Сложность: ⭐⭐☆</p>
+            <ul class="tags">
+              <li>Пресс</li>
+              <li>Осевое стабильность</li>
+            </ul>
+            <p class="hint">Нажмите, чтобы увидеть технику</p>
+          </div>
+          <div class="card-face card-back">
+            <h3>Подсказки по технике</h3>
+            <ul class="details">
+              <li>Плечо над локтем, не уезжайте вперёд или назад.</li>
+              <li>Не поднимать и не опускать таз слишком сильно.</li>
+              <li>Лопатки слегка сведены, шея в нейтрали.</li>
+            </ul>
+            <p class="ai-note">AI анализирует наклон корпуса и стабильность таза.</p>
+          </div>
+        </div>
+      </article>
+
+      <!-- CARD 4 (пример ещё одного) -->
+      <article class="exercise-card">
+        <div class="card-inner">
+          <div class="card-face card-front">
+            <div class="card-label">Целое тело</div>
+            <h2>Берпи</h2>
+            <p class="difficulty">Сложность: ⭐⭐⭐⭐</p>
+            <ul class="tags">
+              <li>Кардио</li>
+              <li>Взрывная сила</li>
+            </ul>
+            <p class="hint">Нажмите, чтобы увидеть технику</p>
+          </div>
+          <div class="card-face card-back">
+            <h3>Подсказки по технике</h3>
+            <ul class="details">
+              <li>Следите за мягким приземлением при прыжке.</li>
+              <li>Сохраняйте контроль в нижней фазе (планка).</li>
+              <li>Не жертвуйте техникой ради скорости.</li>
+            </ul>
+            <p class="ai-note">AI отслеживает фазу прыжка, глубину планки и темп.</p>
+          </div>
+        </div>
+      </article>
+    </section>
+
+    <footer>
+      <span>© 2025 AI Фитнес-Тренер · Упражнения</span>
+      <span>Нажмите на карточку, чтобы потренировать технику</span>
+    </footer>
+  </div>
+
+  <script>
+    // простое переворачивание карточек по клику
+    document.querySelectorAll('.exercise-card .card-inner').forEach(card => {
+      card.addEventListener('click', () => {
+        card.classList.toggle('flipped');
+      });
+    });
+  </script>
+</body>
+</html>
