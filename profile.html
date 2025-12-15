@@ -24,9 +24,15 @@
         <a href="exercises.html" class="nav-link">Упражнения</a>
       </nav>
 
-      <button class="nav-cta" onclick="location.href='camera.html'">
-        Начать тренировку
-      </button>
+      <div style="display:flex; gap:10px;">
+        <button class="nav-cta" onclick="location.href='camera.html'">
+          Тренироваться
+        </button>
+
+        <button class="nav-cta logout-btn" onclick="logout()">
+          Выйти
+        </button>
+      </div>
     </header>
 
     <!-- PROFILE MAIN -->
@@ -148,5 +154,14 @@
       <span>Данные условные · подключите бэкенд позже</span>
     </footer>
   </div>
+
+  <script>
+    function logout() {
+      // later you can clear auth tokens here
+      // localStorage.removeItem("user");
+
+      location.href = "login.html";
+    }
+  </script>
 </body>
 </html>
